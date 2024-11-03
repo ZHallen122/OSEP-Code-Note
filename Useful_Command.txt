@@ -1,0 +1,4 @@
+# File transfer
+    sudo service apache2 start
+    sudo systemctl start smbd
+    sudo systemctl start nmbd
