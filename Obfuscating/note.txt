@@ -1,0 +1,21 @@
+1, Invoke-Obfuscation Tool
+    github link: https://github.com/danielbohannon/Invoke-Obfuscation
+
+    This Tool can Obfuscate powershell tool
+
+    Steps to using it in kali linux:
+        1, cd Invoke-Obfuscation
+        2, chmod 777 *
+        3, sudo su
+        4, pwsh
+        5, Get-ExecutionPolicy (need to be Unrestricted)
+        6, Import-Module ./Invoke-Obfuscation.psd1
+        7, Invoke-Obfuscation (wait for it to start)
+        8, SET SCRIPTPATH /home/kali/tool.ps1   (do not use ~/path)
+        9, Choose one of the below options like Token Obfuscate
+        10, To apply the obfuscate use type 1
+        11, output the file type OUT, and then it will tell you to type output dir (do not use ~/path)
+
+    Reference:
+        https://medium.com/@ammadb/invoke-obfuscation-hiding-payloads-to-avoid-detection-87de291d61d3
+        https://www.danielbohannon.com/blog-1/2017/12/2/the-invoke-obfuscation-usage-guide
