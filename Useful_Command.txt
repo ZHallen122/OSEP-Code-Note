@@ -20,3 +20,10 @@
     When need Multi jobs:
         exploit -j
         jobs
+
+# After in the target machine if we have privilege we could:
+    Disable AV
+        Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableIOAVProtection $true -DisableRealtimeMonitoring $true
+                    
+    Disable firewall
+        NetSh Advfirewall set allprofiles state off
