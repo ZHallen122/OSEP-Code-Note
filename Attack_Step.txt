@@ -1,0 +1,85 @@
+Attack Steps 
+
+Use this as a template
+
+Initial (first reverse shell)
+    Enumeration
+        nmap    sudo nmap -A -Pn 192.168.xxx.start-end
+
+    Exploit
+        Pishing using word, hta, xsl .....
+
+        File upload (try webshell)
+
+        SQL injection (try use sql map)
+
+        .......
+
+    Post exploition
+
+        If connection is unstable   (Try migrate)
+        
+        If target Download payload but no reverse shell (Check AV Folder to bypass)
+
+        If cant execute (Check App locker Folder to bypass)
+
+        If powershell cant run ( Try using ASMI bypass )
+
+        If you dont have enough permission (Check Windows Folder)
+
+
+    Pivote 
+        You should always do pivote on the first machine (Check Pivote Folder)
+
+    Lateral movement
+        Check below
+
+
+Lateral movement from windows
+
+    Enumeration (everytime on a new machine)
+        HostScan
+
+        Bloodhound
+
+        powerview
+
+    Pivote 
+        If you can touch more machine from current new machine you should do pivote (Check Pivote Folder)
+
+    
+    Post exploition
+        Bypass protection (check the Initial say)
+
+        Choose your target from Enumeration
+
+        Windows Credentials (SAM, Mimikatz)
+
+        Check powershell History
+
+        RDP (check clear password)
+
+        MS SQL
+
+
+Lateral movement from linux
+
+    Enumeration
+        Check .bash History
+
+        Check the any accessable .ssh folder to extract ssh (Sometime reuse key is really a thing, this may reuse for other)
+
+    Pivote
+        If you can touch more machine from current new machine you should do pivote (Check Pivote Folder)
+        If on the server there is one website that can only touch from current (Try do ssh tunnel)
+
+    Post exploition
+        privilege (Check linux folder)
+
+        User Configuration Files (.bashrc, VIM) 
+
+        ansible
+
+        Artifactory 
+
+        Kerberos 
