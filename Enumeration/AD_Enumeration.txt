@@ -1,0 +1,71 @@
+Ad Enumeration
+
+Tips:
+1. You should always do enumeration first!
+2. Every time you get to a new accound, new computer you should do enumeration again!
+
+PowerView:
+Tool is available https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1.
+
+    Useful Command:
+
+        ## Get domain information
+        Get-NetDomain
+
+        ## Get all domain user name
+        Get-NetUser | select cn
+
+        ## discover services (MSSQL, IIS)
+        Get-NetUser -SPN
+
+        ## Get all member in the group
+        Get-NetGroup "group" | select member
+
+        ## Get all NetComputer name and system in domain
+        Get-NetComputer | select operatingsystem,dnshostname
+
+        ## Show which users are logged in
+        Get-NetSession / Get-NetLoggedon
+
+        ## Identifies which machines in the domain you are a local admin on. (Really noisy!)
+        Find-LocalAdminAccess
+
+        ##
+        Get-DomainGPOUserLocalGroupMapping
+
+        ## Find Users with Remote Desktop (RDP) Access
+        Get-DomainGPOUserLocalGroupMapping -LocalGroup "Remote Desktop Users"
+
+
+        ##
+        Test-NetConnection -ComputerName "target" -Port 3389
+
+
+BloodHound:
+You Must check the SharpHound version! Not all SharpHound version support BloodHound current version!
+Tool is available https://github.com/SpecterOps/BloodHound
+Tool is available https://github.com/SpecterOps/SharpHound
+
+    Useful Command:
+        ## Collect All
+        Invoke-BloodHound -CollectionMethod All -OutputDirectory "C:\windows\Tasks" -OutputPrefix "corp_audit"
+
+
+Net Tool:
+when tools not working or block
+
+    Useful Command:
+
+        ##  list all user in current domain
+        net user /domain
+
+        ##  list all group in current domain
+        net group /domain
+
+        ##  list the GroupName in current domain
+        net group "GroupName" /domain
+
+        ##  Find network share on the current computer (port 193, 445)
+        net share
+
+

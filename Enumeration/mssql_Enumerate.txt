@@ -1,0 +1,9 @@
+setspn -T corp1 -Q MSSQLSvc/*
+
+PowerUpSQL:
+Get-SQLInstanceLocal -Verbose
+
+Get-SQLServerInfo -Verbose -Instance WEB06
+
+
+select * from master..sysservers

