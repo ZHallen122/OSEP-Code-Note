@@ -44,6 +44,8 @@ Lateral movement from windows
 
         powerview
 
+        nmap 
+        
     Pivote 
         If you can touch more machine from current new machine you should do pivote (Check Pivote Folder)
 
@@ -59,7 +61,9 @@ Lateral movement from windows
 
         RDP (check clear password)
 
-        MS SQL
+        MS SQL  (check SQL folder)
+
+        Delegation
 
 
 Lateral movement from linux
@@ -78,7 +82,7 @@ Lateral movement from linux
 
         User Configuration Files (.bashrc, VIM) 
 
-        ansible
+        ansible (Lateral movement / Linux / ansible)
 
         Artifactory 
 
